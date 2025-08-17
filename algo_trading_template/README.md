@@ -60,7 +60,7 @@ poetry install --no-root       # Create virtual environment & install dependenci
 Run python scripts via poetry.
 
 ```bash
-poetry poetry run python -m src.main
+poetry run python -m src.main
 ```
 
 ---
