@@ -50,7 +50,7 @@ Create a new project **in the current folder** by providing the project path:
 
 ```bash
 cd path/my_new_project         # Enter your new project folder
-poetry install                # Create virtual environment & install dependencies
+poetry install --no-root       # Create virtual environment & install dependencies
 ```
 
 ---
@@ -60,7 +60,7 @@ poetry install                # Create virtual environment & install dependencie
 Run python scripts via poetry.
 
 ```bash
-poetry run python src/main.py
+poetry poetry run python -m src.main
 ```
 
 ---

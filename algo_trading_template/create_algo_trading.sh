@@ -27,6 +27,15 @@ poetry init --name "$PROJECT_NAME" \
 # Create directory structure
 mkdir -p config data src/{api,models/template,utils} tests notebooks
 
+# Add __init__.py files for clean imports
+touch src/__init__.py
+touch src/utils/__init__.py
+touch src/models/__init__.py
+touch src/models/template/__init__.py
+touch src/api/__init__.py
+touch config/__init__.py
+touch data/__init__.py
+
 # README.md
 cat <<EOL > README.md
 # $PROJECT_NAME
@@ -127,9 +136,8 @@ EOL
 touch src/api/{connection.py,operations.py}
 touch src/utils/helpers.py
 touch tests/{test_api.py,test_strategy.py,test_utils.py}
-touch data/__init__.py
-touch src/__init__.py
-touch config/__init__.py
 touch notebooks/.gitkeep
 
 echo "Poetry project '$PROJECT_NAME' created successfully at '$PROJECT_PATH'!"
+echo "Remember to run: poetry install --no-root"
+echo "Then run your scripts with: poetry run python -m src.main"
