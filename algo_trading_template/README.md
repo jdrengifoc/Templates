@@ -57,7 +57,7 @@ poetry install                # Create virtual environment & install dependencie
 
 ### 4. Run via Poetry
 
-Run commands directly without activating**
+Run python scripts via poetry.
 
 ```bash
 poetry run python src/main.py
