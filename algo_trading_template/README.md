@@ -1,6 +1,6 @@
 # Algorithmic Trading Project Template
 
-This folder contains a reusable template for creating algorithmic trading projects in Python.  
+This folder contains a reusable template for creating algorithmic trading projects in Python.\
 It uses **Poetry**, `.env` for secrets, and a clean modular structure.
 
 ---
@@ -36,26 +36,36 @@ cd ~/templates/algo_trading_template
 
 ### 2. Run the generator
 
-Create a new project **in the current folder** by providing the project name:
+Create a new project **in the current folder** by providing the project path:
 
 ```bash
 ./create_algo_trading.sh path/my_new_project
 ```
 
-- This will create a folder called `path/my_new_project/` **inside the `path` directory**.
-
+- This will create a folder called `path/my_new_project/` **inside the **``** directory**.
 
 ---
 
-### 3. Install dependencies and activate environment
+### 3. Install dependencies
 
 ```bash
 cd path/my_new_project         # Enter your new project folder
-poetry install            # Create virtual environment & install dependencies
-poetry shell              # Activate the environment
+poetry install                # Create virtual environment & install dependencies
 ```
 
-### 4. Configure secrets
+---
+
+### 4. Run via Poetry
+
+Run commands directly without activating**
+
+```bash
+poetry run python src/main.py
+```
+
+---
+
+### 5. Configure secrets
 
 Copy the `.env.template` to `.env` and fill in your API credentials:
 
@@ -63,16 +73,6 @@ Copy the `.env.template` to `.env` and fill in your API credentials:
 cp .env.template .env
 nano .env
 ```
-
----
-
-### 5. Run the project
-
-```bash
-poetry run python src/main.py
-```
-
-At this stage, `main.py` is minimal and prints a greeting.
 
 ---
 
@@ -92,6 +92,7 @@ git push -u origin main
 
 ### **Notes**
 
-- `models/template/` contains starter files for `strategy.py` and `feedback.py`. Copy these when creating new models.  
-- `logger.py` is empty by default; you can implement your logging later.  
+- `models/template/` contains starter files for `strategy.py` and `feedback.py`. Copy these when creating new models.
+- `logger.py` is empty by default; you can implement your logging later.
 - Keep the template folder **separate** so it can be reused for multiple projects.
+

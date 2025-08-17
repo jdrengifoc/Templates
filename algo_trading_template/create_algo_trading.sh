@@ -1,19 +1,22 @@
 #!/bin/bash
 
-# Check if project name is provided
+# Check if project path is provided
 if [ -z "$1" ]; then
-    echo "Usage: $0 <PROJECT_NAME>"
+    echo "Usage: $0 <PROJECT_PATH>"
     exit 1
 fi
 
-PROJECT_NAME="$1"
-echo "Creating project $PROJECT_NAME..."
+PROJECT_PATH="$1"
+PROJECT_DIR=$(dirname "$PROJECT_PATH")
+PROJECT_NAME=$(basename "$PROJECT_PATH")
+
+echo "Creating project '$PROJECT_NAME' at '$PROJECT_DIR'..."
 
 # Create project directory
-mkdir -p "$PROJECT_NAME"
-cd "$PROJECT_NAME" || exit
+mkdir -p "$PROJECT_PATH"
+cd "$PROJECT_PATH" || exit
 
-# Initialize Poetry project
+# Initialize Poetry project (use safe name without slashes)
 poetry init --name "$PROJECT_NAME" \
   --dependency requests \
   --dependency python-dotenv \
@@ -73,10 +76,10 @@ if not all([API_KEY, API_SECRET, API_BASE_URL]):
     raise ValueError("API_KEY, API_SECRET, and API_BASE_URL must be set in .env")
 EOL
 
-# src/utils/logger.py (empty file)
+# src/utils/logger.py (empty)
 touch src/utils/logger.py
 
-# src/main.py (minimal)
+# src/main.py
 cat <<EOL > src/main.py
 def main():
     print("Hello, $PROJECT_NAME!")
@@ -88,35 +91,35 @@ EOL
 # src/models/template/strategy.py
 cat <<EOL > src/models/template/strategy.py
 class Strategy:
-    """
+    \"""
     Template for a trading strategy.
     Copy this file and modify it for your own strategies.
-    """
+    \"""
     def decide(self, market_data):
-        """
+        \"""
         Implement your decision logic here.
         Return a dictionary with at least {'action': 'buy'/'sell', ...}
-        """
+        \"""
         raise NotImplementedError
 EOL
 
 # src/models/template/feedback.py
 cat <<EOL > src/models/template/feedback.py
 class Feedback:
-    """
+    \"""
     Template for feedback mechanism to adjust strategies.
     Copy this file and modify for your feedback logic.
-    """
+    \"""
     def record_trade(self, trade_result):
-        """
+        \"""
         Record trade outcome and update internal state if needed.
-        """
+        \"""
         raise NotImplementedError
 
     def adjust_strategy(self, strategy):
-        """
+        \"""
         Adjust strategy parameters based on past performance.
-        """
+        \"""
         raise NotImplementedError
 EOL
 
@@ -129,4 +132,4 @@ touch src/__init__.py
 touch config/__init__.py
 touch notebooks/.gitkeep
 
-echo "Poetry project $PROJECT_NAME created successfully!"
+echo "Poetry project '$PROJECT_NAME' created successfully at '$PROJECT_PATH'!"
